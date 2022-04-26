@@ -36,6 +36,7 @@ public class StudentController {
 	 * null 값을 return 하면 Request path와 같은 jsp 파일을 찾아서
 	 * rendering 을 수행한다
 	 * 단 @ResponseBody 설정이 없어야 한다 
+	 * localhost:8080/school/student/list
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String list(Model model) {
@@ -45,6 +46,9 @@ public class StudentController {
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list() {
+		// RequestMapping 이 /student/list 이기 때문에
+		// return null을 수행하면
+		// return "student/list"를 수행한것과 동일한 효과
 		return null;
 	}
 

@@ -2,7 +2,7 @@
 * SpringMVC project 와 Oracle, MySQL 등 DBMS 와 연동하는 project
 
 ## Dependency 설정
-### spring-jdbc : 붙여넣고 전체 다 완료될때까지 저장하지말것
+### spring-jdbc : 붙여넣고 전체 다 완료될때까지 저장하지말것 부분부분받으면 오류잦아짐
 * spring-jdbc 는 spring-webmvc 와 ```version 을 일치``` 시켜야한다
 ```
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->

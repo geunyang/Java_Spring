@@ -46,24 +46,34 @@
 		justify-content: flex-end;
 		margin: 10px auto;
 	}
+	form div:first-of-type div {
+		flex: 3;
+		margin: 0px;
+	}
 	form div:first-of-type input {
-		flex: 1.8;
+		flex: 2;
+		margin: 0px;
 	}
-		form div:first-of-type button {
-		flex: 1;
+	form div:first-of-type button {
+		margin-left: 6px;
 	}
+
 </style>
 <script>
 	const rootPath = "${rootPath}"
 </script>
-<script src="${rootPath}/static/js/std_input.js?ver=2022-05-10-015"></script>
+<!-- 순서중요  -->
+<script src="${rootPath}/static/js/std_input_save.js?ver=2022-05-12-001"></script>
+<script src="${rootPath}/static/js/std_input.js?ver=2022-05-12-002"></script>
 <form method="post">
 <fieldset>
 <legend>학생정보 등록</legend>
 	<div>
 		<label>학번</label>
-		<input type="text" name="st_num">
-		<button type="button" class="btn-green std-num-check">중복검사</button>
+		<div>
+			<input type="text" name="st_num">
+			<button type="button" class="btn-green std-num-check">중복검사</button>
+		</div>
 	</div>
 	<div>
 		<label>이름</label>

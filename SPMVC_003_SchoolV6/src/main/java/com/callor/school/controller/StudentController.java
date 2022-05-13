@@ -13,12 +13,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.callor.school.model.StudentVO;
 import com.callor.school.service.StudentService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping(value="/student")
 public class StudentController {
 	
 	/*
 	 * Setter 주입
+	 * 
+	 * StudentController studentController
+	 *  	= new StudentServiceImplV1();
+	 * studentController.setStService(stService);
+	 * 
+	 * 사용하기 번거롭고
+	 * final 이 아니라 변경 당할수도 있어용
+	 * 
+	 * 보통 @Autowired 를 사용한 Setter 주입방식을 사용하는데
+	 * Setter 주입 방식에서는 메모리 릭(leak, 누수)가 발생하기도 한다
+	 * 최근에는 생성자 주입방식을 적극 권장하고 있다
 	 */
 	@Autowired
 	@Qualifier("stServiceV1")
@@ -47,7 +61,8 @@ public class StudentController {
 	@RequestMapping(value="/input", method=RequestMethod.POST)
 	// form 에서 전달된 데이터를 VO 객체를 사용하여 받기
 	public String input(StudentVO stVO) {
-		System.out.println(stVO.toString());
+		log.debug(stVO.toString());
+		stService.insert(stVO);
 		return "home";
 	}
 	// form 에서 전달된 데이터를 개별 변수로 받기

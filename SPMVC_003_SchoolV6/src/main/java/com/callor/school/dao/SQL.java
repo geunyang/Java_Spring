@@ -18,7 +18,7 @@ public class SQL {
 						+" #{st_num},"
 						+" #{st_name},"
 						+" #{st_dept},"
-						+" #{t_grade},"
+						+" #{st_grade},"
 						+" #{st_tel},"
 						+" #{st_addr})";
 		public static final String UPDATE = ""

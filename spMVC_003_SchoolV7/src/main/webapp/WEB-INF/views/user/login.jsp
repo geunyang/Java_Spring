@@ -42,6 +42,7 @@ form input, form button {
 			<button>로그인</button>
 		</fieldset>
 	</form>
+	<a href="${rootPath}/user/join">회원가입 바로가기</a>
 	<div class="login_info">
 		<c:if test="${not empty USER}">
 			<div><b>아이디 : </b>${USER.username}</div>

@@ -22,7 +22,7 @@ import com.callor.school.model.UserVO;
 public interface GenericDao<VO, PK> {
 	
 	public List<VO> selectAll();
-	public UserVO findById(PK id);
+	public VO findById(PK id);
 	
 	public int insert(VO vo);
 	public int update(VO vo);

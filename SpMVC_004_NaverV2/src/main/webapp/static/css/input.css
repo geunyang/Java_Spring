@@ -1,0 +1,16 @@
+@charset "UTF-8";
+form {
+	width: 60vw;
+	margin: 30px auto;
+}
+form div {
+	display: flex;
+	justify-content: space-between;
+}
+form input {
+	flex: 1;
+}
+input, textarea, button {
+	letter-spacing: -0.2px;
+	font-size: 1rem;	
+}

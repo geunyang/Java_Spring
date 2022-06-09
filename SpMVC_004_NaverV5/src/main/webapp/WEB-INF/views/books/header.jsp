@@ -13,7 +13,7 @@
 		<li><a href="${rootPath}/news">오늘의 뉴스</a></li>
 		<li><a href="${rootPath}/movies">영화 정보</a></li>
 		<li><a href="${rootPath}/naver">네이버 체험</a></li>
-		<p>${USER }
+
 		<%
 		// 로그인을 하지 않았을때
 		%>
@@ -26,7 +26,7 @@
 		// 로그인을 했을때는 MEMBER 객체에 로그인 한 사용자 정보가 담겨있다
 		%>
 		<c:if test="${not empty USER}">
-			<li><a href="${rootPath}/user/mypage">My page</a></li>
+			<li><a href="${rootPath}/user/mypage">My page(${USER.nickname})</a></li>
 			<li><a href="${rootPath}/user/logout">Logout</a></li>
 		</c:if>
 	</ul>

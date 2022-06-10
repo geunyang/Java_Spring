@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : Dao 인터페이스와 연결하여 mybatis가 클래스를 작성하도록 하기 위한 설정 -->
+<mapper namespace="com.callor.naver.persistance.BookDao">
+	<select id="selectAll" resultType="BookVO">
+		SELECT * FROM tbl_books
+	</select>
+
+	<select id="findById" resultType="BookVO">
+		SELECT * FROM tbl_books WHERE isbn = #{isbn}
+	</select>
+	<!-- 이클립스,STS 대문자를 소문자로 : ctrl + shift + y  -->
+	<!-- 이클립스,STS 소문자를 대문자로 : ctrl + shift + x  -->
+	<insert id="insert" parameterType="BookVO">
+		INSERT INTO tbl_books
+		(
+			isbn,
+			title,
+			author,
+			publisher,
+			price,
+			discount,
+			description,
+			pubdate,
+			link,
+			image
+
+		) VALUES (
+			#{isbn},
+			#{title},
+			#{author},
+			#{publisher},
+			#{price},
+			#{discount},
+			#{description, jdbcType=VARCHAR},
+			#{pubdate, jdbcType=VARCHAR},
+			#{link, jdbcType=VARCHAR},
+			#{image, jdbcType=VARCHAR}
+
+		)
+	</insert>
+	<!-- 
+	mybatis 연동한 insert,update 수행중 발생한
+	부적절한 열유형 1111 오류는
+	
+	보통 form 에서 전체 데이터를 추가하지 않고 
+	일부만 입력된 상태로 insert 에게 전달된 경우 발생한다
+	
+	이 문제 발생을 막으려면 각 변수에 jdbcType-VARCHAR 키워드를 추가해둔다
+	
+	이 키워드를 추가해 두면
+	데이터가 모두 준비되지 않은 상태로 insert 가 성공하게 되어
+	테스트를 완전하게 수행하지 못할수도 있다
+	-->
+	<update id="update" parameterType="BookVO">
+		update tbl_books set 
+				title = #{title},
+				author = #{author},
+				publisher = #{publisher},
+				price = #{price},
+				discount = #{discount},
+				description = #{description},
+				pubdate = #{pubdate},
+				link = #{link},
+				image = #{image}
+		where	isbn = #{isbn}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM tbl_books WHERE isbn = #{isbn}
+	</delete>
+	<!-- mysql create 명령문 -->
+	<!-- 만약 tbl_books table 이 없으면 table 을 생성하라 -->
+	<!-- CREATE TABLE IS NOT EXISTS tbl_books -->
+	<select id="create_book_table">
+		CREATE TABLE tbl_books (
+		isbn	VARCHAR2(13)	PRIMARY	KEY,
+		title	NVARCHAR2(255)	NOT NULL,
+		author	NVARCHAR2(125)	NOT NULL,
+		publisher	NVARCHAR2(125)	NOT NULL,
+		price	NUMBER,
+		discount	NUMBER,
+		description	NVARCHAR2(2000),
+		pubdate	VARCHAR2(10),
+		link	VARCHAR2(125),
+		image	VARCHAR2(125)
+		)
+	</select>
+</mapper>
+

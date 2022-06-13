@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : Dao 인터페이스와 연결하여 mybatis가 클래스를 작성하도록 하기 위한 설정 -->
+<mapper namespace="com.callor.images.persistance.ImagesDao">
+
+	<!-- mysql create 명령문 -->
+	<!-- 만약 tbl_books table 이 없으면 table 을 생성하라 -->
+	<!-- CREATE TABLE IS NOT EXISTS tbl_books -->
+	<select id="create_images_table">
+		CREATE TABLE tbl_images (
+			i_seq	NUMBER	PRIMARY	KEY,
+			i_bseq	NUMBER	NOT NULL,
+			i_originalName	VARCHAR2(255)	NOT NULL,
+			i_imageName	NVARCHAR2(255) NOT NULL
+		)
+	</select>
+</mapper>
+

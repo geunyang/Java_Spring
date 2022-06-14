@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : Dao 인터페이스와 연결하여 mybatis가 클래스를 작성하도록 하기 위한 설정 -->
+<mapper namespace="com.callor.images.persistance.SelfitDao">
+
+	<select id="workOutView" resultType="WorkOutDTO">
+		SELECT * FROM view_workout
+		WHERE sl_scid = #{sl_scid}
+	</select>
+	
+	<select id="selectStartMenu" resultType="StartMenuDTO">
+		SELECT sc_num, sc_label, sc_division
+		from tbl_sch
+		GROUP BY sc_num, sc_label, sc_division
+		order by sc_num
+	
+	</select>
+	
+	<select id="selectDaySet" resultType="StartMenuDTO">
+		SELECT sc_num, sc_label, sc_division, sc_part, sc_day
+		FROM tbl_sch
+		WHERE sc_num = #{sc_num}
+	</select>
+
+	<select id="create_selfit_table">
+		CREATE TABLE tbl_bbs (
+		b_seq NUMBER PRIMARY KEY,
+		b_date VARCHAR2(10) NOT NULL,
+		b_time VARCHAR2(10) NOT NULL,
+		b_writer VARCHAR2(125) NOT NULL,
+		b_subject nVARCHAR2(125) NOT NULL,
+		b_content nVARCHAR2(1000) NOT NULL
+		)
+	</select>
+
+</mapper>
+

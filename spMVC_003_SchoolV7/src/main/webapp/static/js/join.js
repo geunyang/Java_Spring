@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     username.focus();
     return false;
   };
-  // join button 킬릭
+  // join button 클릭
   if (join_btn) {
     join_btn.addEventListener("click", () => {
       if (username.value === "") {

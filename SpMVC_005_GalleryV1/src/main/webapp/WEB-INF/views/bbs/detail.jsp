@@ -11,8 +11,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>HOME</h1>
-	<img src="${rootPath}/upload/${FILE}" alt="지금은 안보여요">
-	<a href="${rootPath}/bbs/write">게시판 글쓰기</a>
+	<h2>작성자 : ${BBS.b_writer}</h2>
+	<h2>작성일자 : ${BBS.b_date}</h2>
+	<h2>작성시각 : ${BBS.b_time}</h2>
+	<h2>제목 : ${BBS.b_subject}</h2>
+	<h2>내용 : ${BBS.b_content}</h2>
+	
+	<c:forEach items="${BBS.images}" var="IMAGE">
+		<img src="${rootPath}/upload/${IMAGE.i_imageName}">
+	</c:forEach>
 </body>
 </html>

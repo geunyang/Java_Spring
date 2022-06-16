@@ -5,6 +5,11 @@
 
 <!-- namespace : Dao 인터페이스와 연결하여 mybatis가 클래스를 작성하도록 하기 위한 설정 -->
 <mapper namespace="com.callor.images.persistance.BBsDao">
+
+	<select id="findById" resultType="BBsVO">
+		SELECT * FROM tbl_bbs
+		WHERE b_seq = #{b_seq}
+	</select>
 	<!-- 
 	insert 명령문을 실행하기 전에(BEFORE)
 	seq를 생성하는 select문을 먼저 실행하고

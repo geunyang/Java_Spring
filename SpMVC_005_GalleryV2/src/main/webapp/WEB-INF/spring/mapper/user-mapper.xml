@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : Dao 인터페이스와 연결하여 mybatis가 클래스를 작성하도록 하기 위한 설정 -->
+<mapper namespace="com.callor.images.persistance.UserDao">
+	<select id="selectAll" resultType="UserVO">
+		SELECT * FROM tbl_users
+	</select>
+
+	<select id="findById" resultType="UserVO">
+		SELECT * FROM tbl_users WHERE
+		username = #{username}
+	</select>
+	<select id="findByName" resultType="UserVO">
+		SELECT * FROM tbl_users WHERE
+		name = #{name}
+	</select>
+	<select id="findByEmail" resultType="UserVO">
+		SELECT * FROM tbl_users
+		WHERE email = #{email}
+	</select>
+	<select id="findByNickName" resultType="UserVO">
+		SELECT * FROM tbl_users
+		WHERE nickname = #{nickname}
+	</select>
+	<!-- 이클립스,STS 대문자를 소문자로 : ctrl + shift + y -->
+	<!-- 이클립스,STS 소문자를 대문자로 : ctrl + shift + x -->
+	<insert id="insert" parameterType="UserVO">
+		INSERT INTO tbl_users(
+		username,
+		password,
+		email,
+		name,
+		nickname,
+		role
+		) VALUES (
+		#{username},
+		#{password},
+		#{email},
+		#{name},
+		#{nickname},
+		#{role}
+		)
+
+	</insert>
+
+	<update id="update" parameterType="UserVO">
+		UPDATE tbl_users SET
+		password = #{password},
+		email = #{email},
+		name = #{name},
+		nickname = #{nickname},
+		role = #{role}
+		WHERE username = #{username}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM tbl_users WHERE username = #{username}
+	</delete>
+	<!-- mysql create 명령문 -->
+	<!-- 만약 tbl_books table 이 없으면 table 을 생성하라 -->
+	<!-- CREATE TABLE IS NOT EXISTS tbl_books -->
+	<select id="create_user_table">
+		CREATE TABLE tbl_users (
+
+		username VARCHAR2(20) PRIMARY KEY,
+		password NVARCHAR2(125) NOT NULL,
+		email VARCHAR2(125) NOT NULL UNIQUE,
+		name NVARCHAR2(125),
+		nickname NVARCHAR2(125),
+		role VARCHAR2(5)
+		)
+	</select>
+</mapper>
+

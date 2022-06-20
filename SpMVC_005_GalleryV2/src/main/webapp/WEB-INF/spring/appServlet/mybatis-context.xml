@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<!-- mybatis 3.x 장점 -->
+	<!-- context 설정만 잘하면 DBMS 연결하여 사용하는데 작성하는 코드가 매우 간소해진다 -->
+	
+	<bean id="mysqlDS" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/mydb"/>
+		<property name="username" value="user1"/>
+		<property name="password" value="!Korea8080"/>
+	</bean>
+	
+	<!-- dataSource -->
+	<!-- DBMS 연결하는데 필요한 기본정보 설정 -->
+	<!-- BasicDataSource ds = new BasicDataSource() -->
+	<!-- property : setter method -->
+	<bean id="oracleDS" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url"
+			value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="bookuser" />
+		<property name="password" value="12341234" />
+	</bean>
+
+	<!-- SqlSessionFactory -->
+	<!-- Dao, Mapper 등을 사용하여 DB 연결하는 bean 생산기지 설정 -->
+	<!--
+	jdbcTypeForNull 속성
+	Insert Update 를 수행할 때 부적절한 열 유형 1111 문제를
+	설정에서 제거하기
+	이 속성을 지정해두면 SQL Insert, update 에서 jdbcType=VARCHAR 등의
+	코드를 사용하지 않아도 된다
+	  -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="oracleDS" />
+		<property name="typeAliasesPackage"
+			value="com.callor.images.model" />
+		<property name="mapperLocations"
+			value="/WEB-INF/spring/mapper/*-mapper.xml" />
+		<property name="configuration">
+			<bean class="org.apache.ibatis.session.Configuration">
+				<property name="jdbcTypeForNull" value="VARCHAR"/>
+				<property name="cacheEnabled" value="true"/>
+				<property name="defaultExecutorType" value="REUSE"/>
+				<property name="mapUnderscoreToCamelCase" value="false"/>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- SqlSessionTemplate -->
+	<!-- SessionFactory를 도와주는 도구 -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+	<tx:jta-transaction-manager></tx:jta-transaction-manager>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<constructor-arg ref="oracleDS"/>
+	</bean>
+
+	<!-- Dao interface가 저장된 package를 scan하여 SqlSessionFactory에게 알려주는 역할 -->
+	<mybatis-spring:scan
+		base-package="com.callor.images.persistance" />
+
+</beans>

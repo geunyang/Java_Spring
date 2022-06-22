@@ -15,8 +15,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.callor.ems.model.EmsVO;
+import com.callor.ems.model.UserVO;
 import com.callor.ems.service.QualifyConfig;
-import com.callor.ems.service.SendMailService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,7 +38,7 @@ public class SendMailServiceImplV2 extends SendMailServiceImplV1 {
 	}
 	
 	@Override
-	public void sendMail(EmsVO emsVO) {
+	public void sendMail(EmsVO emsVO, UserVO userVO) {
 		
 		File htmlFile = null;
 		Scanner scan = null;
@@ -55,13 +55,16 @@ public class SendMailServiceImplV2 extends SendMailServiceImplV1 {
 		log.debug("받는 사람 이름 : {}", emsVO.getE_to_name());
 		log.debug("제목 : {}", emsVO.getE_subject());
 		
+		String uuStr = UUID.randomUUID().toString();
+		userVO.setKey_ok(uuStr);
+		
 		StringBuilder bodyText = new StringBuilder();
 		while(scan.hasNext()) {
 			String line = scan.nextLine();
 			
-			line.replace("@이름", emsVO.getE_to_name());
-			line.replace("@email", emsVO.getE_to_email());
-			line.replace("@key", UUID.randomUUID().toString());
+			line = line.replace("@이름", emsVO.getE_to_name());
+			line = line.replace("@email", emsVO.getE_to_email());
+			line = line.replace("@key", uuStr);
 			
 			bodyText.append(line);
 		}
@@ -82,7 +85,7 @@ public class SendMailServiceImplV2 extends SendMailServiceImplV1 {
 			String[] sendTO = {emsVO.getE_to_email()};
 			mHelper.setTo(sendTO);
 			mHelper.setSubject("이메일 인증");
-			mHelper.setText(bodyText.toString());
+			mHelper.setText(bodyText.toString(),true);
 			
 			// 메일을 보낸다
 			sender.send(message);

@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.callor.ems.model.EmsVO;
+import com.callor.ems.model.UserVO;
 import com.callor.ems.service.QualifyConfig;
 import com.callor.ems.service.SendMailService;
 
@@ -70,6 +71,12 @@ public class SendMailServiceImplV1 implements SendMailService {
 		
 		
 		
+		
+	}
+
+	@Override
+	public void sendMail(EmsVO emsVO, UserVO userVO) {
+		// TODO Auto-generated method stub
 		
 	}
 

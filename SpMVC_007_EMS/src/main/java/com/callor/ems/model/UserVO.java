@@ -22,13 +22,16 @@ public class UserVO {
 	@Size(min = 5, max = 12, message = "USER NAME 은 5 ~ 12 글자 까지")
 	private String username;
 	
-	@Pattern(regexp = "^.*(?=^.{8,15}$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$",
-			message = "비밀번호는 영문 숫자 특수문자 포함 8 ~ 15 자리 까지")
+//	@Pattern(regexp = "^.*(?=^.{8,15}$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$",
+//			message = "비밀번호는 영문 숫자 특수문자 포함 8 ~ 15 자리 까지")
 	private String password;
 	
 	@Email(message="이메일을 정확히 입력해주세요")
 	private String email;
 	private String name;
 	private String role;
+	
+	private String key;
+	private String key_ok;
 
 }

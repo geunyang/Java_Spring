@@ -44,9 +44,6 @@ public class MakeNaverUser {
 				new String[] {"naver.username","naver.password"}
 				);
 		
-		System.out.println(secFiles.get("db.connection.properties")[0]);
-		System.out.println(secFiles.get("db.connection.properties")[1]);
-		
 		// Map은 for 반복문 사용할수 없기 때문에 key값 만 뽑아서 set에 담아 핸들링
 		// set 형식은 중복되지 않은 데이터만 넣을수 있다
 		Set<String> files = secFiles.keySet();
@@ -70,6 +67,8 @@ public class MakeNaverUser {
 				}
 				out.flush();
 				out.close();
+				
+				System.out.println("File Writer OK");
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}

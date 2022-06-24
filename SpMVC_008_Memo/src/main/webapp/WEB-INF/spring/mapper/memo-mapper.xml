@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : Dao 인터페이스와 연결하여 mybatis가 클래스를 작성하도록 하기 위한 설정 -->
+<mapper namespace="com.callor.memo.persistance.MemoDao">
+
+	<select id="selectAll" resultType="MemoVO">
+		SELECT * FROM tbl_memo
+	</select>
+	<select id="findById" resultType="MemoVO">
+		SELECT * FROM tbl_memo
+		WHERE m_seq = #{m_seq}
+	</select>
+	<!-- insert 명령문을 실행하기 전에(BEFORE) seq를 생성하는 select문을 먼저 실행하고 그 결과를 BBsVO의 
+		b_seq 변수에 담아라 -->
+	<insert id="insert" parameterType="MemoVO">
+		<selectKey keyProperty="m_seq" resultType="Long"
+			order="BEFORE">
+			SELECT m_seq.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into tbl_memo(
+		m_seq,
+		m_author,
+		m_date,
+		m_time,
+		m_memo,
+		m_image
+
+		)values(
+		#{m_seq},
+		#{m_author},
+		#{m_date},
+		#{m_time},
+		#{m_memo},
+		#{m_image}
+
+		)
+
+	</insert>
+
+	<update id="update" parameterType="MemoVO">
+		UPDATE tbl_memo SET
+				m_author = #{m_author},
+				m_date = #{m_date},
+				m_memo = #{m_memo},
+				m_image = #{m_image}
+		WHERE m_seq = #{m_seq}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM tbl_memo WHERE m_seq = #{m_seq}
+	</delete>
+	<!-- mysql create 명령문 -->
+	<!-- 만약 tbl_books table 이 없으면 table 을 생성하라 -->
+	<!-- CREATE TABLE IS NOT EXISTS tbl_books -->
+<!--
+	 	<select id="create_memo_table">
+		CREATE TABLE tbl_bbs (
+		m_seq Number PRIMARY KEY,
+		m_author VARCHAR2(25) NOT NULL,
+		m_date VARCHAR2(10) NOT NULL,
+		m_time VARCHAR2(10) NOT NULL,
+		m_memo nVARCHAR2(400) NOT NULL,
+		m_image nVARCHAR2(125) NOT NULL
+		)
+	</select>
+	<select id="create_memo_seq">
+		CREATE sequence m_seq
+		increment by 1 start with 1
+	</select> 
+-->
+</mapper>
+

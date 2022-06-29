@@ -64,6 +64,7 @@
       }
       input:focus {
         outline: none;
+        background-color: inherit;
       }
 </style>
 </head>

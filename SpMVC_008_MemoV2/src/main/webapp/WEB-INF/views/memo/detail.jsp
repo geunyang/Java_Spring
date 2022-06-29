@@ -21,6 +21,7 @@
       html {
         width: 100vw;
         height: 100vh;
+		font-family: 'Gaegu', cursive;
       }
       body {
         width: 100%;

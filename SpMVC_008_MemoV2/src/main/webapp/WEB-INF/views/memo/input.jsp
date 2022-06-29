@@ -21,6 +21,7 @@
       html {
         width: 100vw;
         height: 100vh;
+		font-family: 'Gaegu', cursive;
       }
       body {
         width: 100%;
@@ -63,6 +64,7 @@
       }
       input:focus {
         outline: none;
+        background-color: inherit;
       }
       div button {
         padding: 12px 16px;
@@ -98,7 +100,7 @@
         />
         <input name="file" type="file" accept="images/*" />
         <div>
-          <button type="button">낙서남기기</button>
+          <button>낙서남기기</button>
         </div>
       </form>
     </section>

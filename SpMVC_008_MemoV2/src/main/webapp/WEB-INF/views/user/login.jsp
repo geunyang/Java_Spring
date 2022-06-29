@@ -9,64 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>끄적끄적</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
-<style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        width: 100vw;
-        height: 100vh;
-        font-family: 'Gaegu', cursive;
-      }
-      body {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background-color: powderblue;
-        background-image: url("../../../images/image14.jpg");
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 100% 100%;
-      }
-      header {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 50px;
-      }
-      section {
-        width: 80%;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        flex: 1;
-      }
-      form {
-        width: 80%;
-        text-align: center;
-      }
-      input {
-        padding: 1rem;
-        width: 100%;
-        background-color: inherit;
-        border: none;
-      }
-      input:focus {
-        outline: none;
-        background-color: inherit;
-      }
-</style>
+<link rel="stylesheet" href="static/css/memo.css">
 </head>
 <body>
     <header><h1>로그인</h1></header>

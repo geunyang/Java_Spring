@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const memo_table = document.querySelector("table.memo");
-  memo_table?.addEventListener("click", (e) => {
+  const memo_article = document.querySelector("article.memo");
+  memo_article?.addEventListener("click", (e) => {
     // table 에 click 이벤트를 적용하면 가장 안쪽의 td 가 target 으로 작동한다
     const target = e.target;
     // 가장 안쪽의 td 가 클릭되면
     // td 를 감싸고 있는 tr 을 찾아라
-    const tr = target?.closest("TR");
+    const span = target?.closest("div");
 
-    const seq = tr?.dataset.seq;
+    const seq = span?.dataset.seq;
     /*
     JS 에서 변수값이 
     0, undefined, null, NaN, "" 등은 if 에서 모두 false 로 인식

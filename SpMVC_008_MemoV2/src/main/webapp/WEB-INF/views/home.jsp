@@ -14,9 +14,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap"
 	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap"
-	rel="stylesheet">
 <style>
 * {
 	box-sizing: border-box;
@@ -38,7 +35,7 @@ body {
 	align-items: center;
 	flex-direction: column;
 	background-color: powderblue;
-	background-image: url("../../images/image14.jpg");
+	background-image: url("${rootPath}/static/image/image14.jpg");
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 100% 100%;
@@ -76,7 +73,7 @@ section {
         border-top: 1px solid gray;
         padding: 5px;
       } */
-table {
+/* table {
 	width: inherit;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-collapse: collapse;
@@ -92,6 +89,10 @@ table th {
 
 table td {
 	border-top: 1px solid gray;
+} */
+
+span {
+	cursor: pointer;
 }
 
 div.btn_home {
@@ -132,6 +133,8 @@ input:focus {
 div a {
 	text-decoration: none;
 	color: white;
+			font-family: 'Gaegu', cursive;
+			font-size: 20px;
 }
 
 div.rgyPostIt {
@@ -142,7 +145,6 @@ div.rgyPostIt {
 	border: 1px solid #f8f861;
 	border-left: 30px solid #f8f861;
 	border-bottom-right-radius: 60px 10px;
-	font-family: 'Nanum Pen Script';
 	font-size: 27px;
 	color: #555;
 	word-break: break-all;
@@ -196,7 +198,7 @@ div.rgyPostIt:hover::after {
 	-webkit-box-shadow: 2px 37px 7px rgba(0, 0, 0, 0.37);
 }
 
-div.rgyPostIt>p {
+/* div.rgyPostIt>p {
 	padding: 5px 0 !important;
 }
 
@@ -211,42 +213,33 @@ div.rgyPostIt>p::before {
 
 div.rgyPostIt>p>a {
 	color: #555;
-}
+} */
 </style>
 <script>
 	const rootPath = "${rootPath}"
 </script>
-<script src="${rootPath}/static/memo.js?20220627002"></script>
+<script src="${rootPath}/static/memo.js?20220630004"></script>
 </head>
 <body>
 	<header>
 		<h1>${USERNAME}님이끄적댄것들</h1>
 	</header>
 	<section>
-		<table class="memo">
-			<tr>
-				<th>SEQ</th>
-				<th>작성일자</th>
-				<th>작성시각</th>
-				<th>내용</th>
-			</tr>
+		<article class="memo">
 			<c:if test="${empty MEMOS}">
-				<tr>
-					<td colspan="4">끄적인것이 없습니다</td>
-				</tr>
+				<div class="rgyPostIt">
+					<span>끄적인것이 없습니다</span>
+				</div>
 			</c:if>
-			<!-- ${MEMOS} controller가 준 값 -->
 			<c:forEach items="${MEMOS}" var="MEMO" varStatus="INDEX">
 				<div class="rgyPostIt">
-				<tr data-seq="${MEMO.m_seq}">
-					<td>${INDEX.count}</td>
-					<td>${MEMO.m_date}</td>
-					<td>${MEMO.m_time}</td>
-					<td>${MEMO.m_memo}</td>
-				</tr>
+					<div data-seq="${MEMO.m_seq}">
+						<span>${INDEX.count}</span> <span>${MEMO.m_date}</span> <span>${MEMO.m_time}</span>
+						<span>${MEMO.m_memo}</span>
+					</div>
 				</div>
 			</c:forEach>
-		</table>
+		</article>
 		<div class="btn_home">
 			<button type="button">
 				<a href="${rootPath}/memo/insert">끄적대기</a>

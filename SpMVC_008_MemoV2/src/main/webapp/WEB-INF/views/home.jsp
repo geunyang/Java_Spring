@@ -9,8 +9,58 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>끄적끄적</title>
-<link rel="stylesheet" href="static/css/memo.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap"
+	rel="stylesheet">
 <style>
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	width: 100vw;
+	height: 100vh;
+	font-family: 'Gaegu', cursive;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: powderblue;
+	background-image: url("../../images/image14.jpg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% 100%;
+}
+
+header {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 50px;
+}
+
+section {
+	width: 80%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex: 1;
+}
 
 /*       table {
         width: inherit;
@@ -48,9 +98,119 @@ div.btn_home {
 	margin: 20px auto;
 }
 
+div button {
+	padding: 12px 16px;
+	cursor: pointer;
+	background-color: darkgray;
+	border-style: none;
+	margin: 0 20px;
+	border-radius: 5px;
+	color: white;
+}
+
+div button:hover {
+	box-shadow: 2px 3px 5px 0px #eee;
+}
+
+form {
+	width: 80%;
+	text-align: center;
+}
+
+input {
+	padding: 1rem;
+	width: 100%;
+	background-color: inherit;
+	border: none;
+}
+
+input:focus {
+	outline: none;
+	background-color: inherit;
+}
+
 div a {
 	text-decoration: none;
 	color: white;
+}
+
+div.rgyPostIt {
+	position: relative;
+	display: inline-block;
+	padding: 20px 45px 20px 15px;
+	margin: 5px 0;
+	border: 1px solid #f8f861;
+	border-left: 30px solid #f8f861;
+	border-bottom-right-radius: 60px 10px;
+	font-family: 'Nanum Pen Script';
+	font-size: 27px;
+	color: #555;
+	word-break: break-all;
+	background: #ffff88; /* Old browsers */
+	background: -moz-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%,
+		#ffffc6 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(81%, #ffff88
+		), color-stop(82%, #ffff88), color-stop(82%, #ffff88),
+		color-stop(100%, #ffffc6)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%,
+		#ffffc6 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%,
+		#ffffc6 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%,
+		#ffffc6 100%); /* IE10+ */
+	background: linear-gradient(135deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6
+		100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff88',
+		endColorstr='#ffffc6', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+	transition: all 0.2s;
+	-webkit-transition: all 0.2s;
+}
+
+div.rgyPostIt::after {
+	content: " ";
+	position: absolute;
+	z-index: -1;
+	right: 0;
+	bottom: 35px;
+	width: 150px;
+	height: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	box-shadow: 2px 35px 5px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 2px 35px 5px rgba(0, 0, 0, 0.4);
+	transform: matrix(-1, -0.1, 0, 1, 0, 0);
+	-webkit-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+	-moz-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+	-ms-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+	-o-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+	transition: all 0.2s;
+	-webkit-transition: all 0.2s;
+}
+
+div.rgyPostIt:hover {
+	border-bottom-right-radius: 75px 30px;
+}
+
+div.rgyPostIt:hover::after {
+	box-shadow: 2px 37px 7px rgba(0, 0, 0, 0.37);
+	-webkit-box-shadow: 2px 37px 7px rgba(0, 0, 0, 0.37);
+}
+
+div.rgyPostIt>p {
+	padding: 5px 0 !important;
+}
+
+div.rgyPostIt>p::before {
+	content: "\f198";
+	margin-right: 7px;
+	font-family: "FontAwesome";
+	font-weight: normal;
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+div.rgyPostIt>p>a {
+	color: #555;
 }
 </style>
 <script>
@@ -77,12 +237,14 @@ div a {
 			</c:if>
 			<!-- ${MEMOS} controller가 준 값 -->
 			<c:forEach items="${MEMOS}" var="MEMO" varStatus="INDEX">
+				<div class="rgyPostIt">
 				<tr data-seq="${MEMO.m_seq}">
 					<td>${INDEX.count}</td>
 					<td>${MEMO.m_date}</td>
 					<td>${MEMO.m_time}</td>
 					<td>${MEMO.m_memo}</td>
 				</tr>
+				</div>
 			</c:forEach>
 		</table>
 		<div class="btn_home">

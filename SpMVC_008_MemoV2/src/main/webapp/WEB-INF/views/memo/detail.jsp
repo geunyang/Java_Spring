@@ -99,6 +99,7 @@ div a {
 	font-size: 20px;
 }
 </style>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 </head>
 <body>
 	<header>
@@ -130,13 +131,13 @@ div a {
 		</table>
 		<div class="btn_detail">
 			<button type="button">
-				<a href="${rootPath}/memo/${MEMO.m_seq}/update">다시쓰기</a>
+				<a href="${rootPath}/memo/${MEMO.m_seq}/update"><i class="xi-save"></i>다시쓰기</a>
 			</button>
 			<button type="button">
-				<a href="${rootPath}/memo/${MEMO.m_seq}/delete">이별하기</a>
+				<a href="${rootPath}/memo/${MEMO.m_seq}/delete"><i class="xi-trash-o"></i>이별하기</a>
 			</button>
 			<button type="button">
-				<a href="${rootPath}/">목록으로</a>
+				<a href="${rootPath}/"><i class="xi-home-o"></i>목록으로</a>
 			</button>
 		</div>
 	</section>

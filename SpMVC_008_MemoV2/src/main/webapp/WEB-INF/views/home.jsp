@@ -141,7 +141,7 @@ div.rgyPostIt {
 	position: relative;
 	display: inline-block;
 	padding: 20px 45px 20px 15px;
-	margin: 5px 0;
+	margin: 20px 10px;
 	border: 1px solid #f8f861;
 	border-left: 30px solid #f8f861;
 	border-bottom-right-radius: 60px 10px;
@@ -215,6 +215,7 @@ div.rgyPostIt>p>a {
 	color: #555;
 } */
 </style>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script>
 	const rootPath = "${rootPath}"
 </script>
@@ -242,16 +243,16 @@ div.rgyPostIt>p>a {
 		</article>
 		<div class="btn_home">
 			<button type="button">
-				<a href="${rootPath}/memo/insert">끄적대기</a>
+				<a href="${rootPath}/memo/insert"><i class="xi-paper-o"></i>끄적대기</a>
 			</button>
 			<c:if test="${empty USERNAME}">
 				<button type="button">
-					<a href="${rootPath}/user/login">로그인</a>
+					<a href="${rootPath}/user/login"><i class="xi-log-in"></i>로그인</a>
 				</button>
 			</c:if>
 			<c:if test="${not empty USERNAME}">
 				<button type="button">
-					<a href="${rootPath}/user/logout">로그아웃</a>
+					<a href="${rootPath}/user/logout"><i class="xi-log-out"></i>로그아웃</a>
 				</button>
 			</c:if>
 		</div>

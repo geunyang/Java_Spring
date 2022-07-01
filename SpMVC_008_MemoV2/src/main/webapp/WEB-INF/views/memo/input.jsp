@@ -161,6 +161,7 @@ div.rgyPostIt:hover::after {
 	-webkit-box-shadow: 2px 37px 7px rgba(0, 0, 0, 0.37);
 }
 </style>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 </head>
 <body>
 	<header>
@@ -178,7 +179,7 @@ div.rgyPostIt:hover::after {
 			</div>
 			<input name="file" type="file" accept="images/*" />
 			<div>
-				<button>낙서남기기</button>
+				<button><i class="xi-save"></i>낙서남기기</button>
 			</div>
 		</form>
 	</section>

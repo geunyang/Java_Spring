@@ -13,9 +13,9 @@
 <body>
 	<h1>welcome</h1>
 	<form method="POST">
-		<input name="ad_name"/>
-		<input name="ad_tel"/>
-		<input name="ad_addr"/>
+		<input name="a_name" placeholder="이름"/>
+		<input name="a_tel" placeholder="연락처"/>
+		<input name="a_addr" placeholder="주소"/>
 		<button>전송</button>
 	</form>
 </body>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.callor.address.persistence.AddressDao">
+
+	<select id="selectAll" resultType="AddressVO">
+		select * from tbl_address
+	</select>
+	<select id="findById" resultType="AddressVO">
+		select * from tbl_address where a_seq =#{a_seq}
+	</select>
+	<insert id="insert" parameterType="AddressVO">
+		insert into
+		tbl_address(a_name, a_tel, a_address)
+		values(#{a_name},#{a_tel},#{a_address})
+	</insert>
+	<update id="update" parameterType="AddressVO">
+		update tbl_address set
+			a_name = #{a_name},
+			a_tel = #{a_tel},
+			a_address = #{a_address}
+		where a_seq = #{a_seq}	
+	</update>
+	<delete id="delete">
+		delete from tbl_address
+		where a_seq = #{a_seq}	
+	</delete>
+
+	<select id="create_addr_table">
+		create table if not exists tbl_address(
+
+		a_seq bigint
+		auto_increment primary key,
+		a_name varchar(20) not null,
+		a_tel
+		varchar(30),
+		a_address varchar(125)
+
+		)
+	</select>
+</mapper> 

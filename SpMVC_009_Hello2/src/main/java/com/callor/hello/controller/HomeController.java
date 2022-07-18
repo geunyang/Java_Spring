@@ -51,10 +51,10 @@ public class HomeController {
 	 * 
 	 * 데이터가 뒤섞이는 오류가 발생할 확률이 있음
 	 */
-	public String home(String ad_name, String ad_tel, String ad_addr) {
-		homeService.insert(ad_name, ad_tel, ad_addr);
-		return "home";
-	}
+//	public String home(String ad_name, String ad_tel, String ad_addr) {
+//		homeService.insert(ad_name, ad_tel, ad_addr);
+//		return "home";
+//	}
 	
 	/*
 	 * form 에서 보내온 데이터를 AddressVO 클래스 타입의 객체에 한번에 받기

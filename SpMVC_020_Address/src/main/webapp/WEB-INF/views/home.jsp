@@ -9,9 +9,51 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
+<style>
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+html {
+	width: 100vw;
+	height: 100vh;
+}
+body {
+	width: inherit;
+	height: inherit;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+header {
+	width: inherit;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 50px;
+	background-color: #118bee;
+}
+form {
+	width: 80%;
+	text-align: center;
+	margin: 20px;
+}
+input {
+	padding: 1rem;
+	width: 100%;
+}
+button {
+	width: 100%;
+}
+</style>
+<link rel="stylesheet" href="https://unpkg.com/mvp.css">
 </head>
 <body>
-	<h1>어서옵쇼</h1>
+	<header>
+		<h1>주소록</h1>
+	</header>
 	<form method="POST">
 		<input name="a_seq" type="hidden" value='<c:out value="${ADDR.a_seq}" default="0"/>'/>
 		<input name="a_name"  value="${ADDR.a_name}"/> 
@@ -29,9 +71,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${ADDRS}" var="ADDR">
+			<c:forEach items="${ADDRS}" var="ADDR" varStatus="INDEX">
 				<tr>
-					<td>${ADDR.a_seq}</td>
+					<td>${INDEX.count}</td>
 					<td><a href="${rootPath}/detail?seq=${ADDR.a_seq}">${ADDR.a_name}</a></td>
 					<td>${ADDR.a_tel}</td>
 					<td>${ADDR.a_address}</td>
@@ -39,6 +81,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<%@include file="/WEB-INF/views/pagination.jsp" %>
 
 </body>
 </html>

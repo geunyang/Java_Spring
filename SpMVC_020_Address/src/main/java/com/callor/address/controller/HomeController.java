@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.callor.address.config.QualifyConfig;
 import com.callor.address.model.AddressVO;
+import com.callor.address.model.SearchPage;
 import com.callor.address.service.AddressService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,9 +30,23 @@ public class HomeController {
 
 	// 처음 시작 화면에 나타나게!
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
-		List<AddressVO> addressList = addrService.selectAll();
+	public String home(Model model,@RequestParam(name="pageno",required = false, defaultValue = "0") int pageno) {
+//		List<AddressVO> addressList = addrService.selectAll();
+		SearchPage searchPage = SearchPage.builder()
+				.a_name("")
+				.limit(10)
+				.offset(pageno * 10)
+				.build();
+		
+		searchPage.setCurrentPageNo(pageno);
+		// 페이지계산
+		addrService.searchAndPage(model, searchPage);
+		
+		// 데이터가져오기
+		List<AddressVO> addressList = addrService.searchAndPage(searchPage);
+		
 		model.addAttribute("ADDRS", addressList);
+
 		return "home";
 	}
 
@@ -43,7 +58,7 @@ public class HomeController {
 	}
 
 	// seq 변수에 3을 담아서 보내겟다 http:localhost:8080/address/detail?seq=3
-	// 220718 복습시 코드수정할것
+
 	@RequestMapping(value = "/detail", method=RequestMethod.GET)
 	public String detail(@RequestParam(name = "seq", required = false, defaultValue = "0") long a_seq, Model model) {
 		log.debug("SEQ{}", a_seq);
@@ -60,6 +75,12 @@ public class HomeController {
 		AddressVO addrVO = addrService.findById(a_seq);
 		model.addAttribute("ADDR",addrVO);
 		return "home";
+	}
+	
+	@RequestMapping(value = "/delete", method=RequestMethod.GET)
+	public String delete(@RequestParam(name="seq", required = false, defaultValue = "0") long a_seq) {
+		addrService.delete(a_seq);
+		return "redirect:/";
 	}
 
 

@@ -28,6 +28,7 @@ public class StudentController {
 		List<StudentVO> stdList = stdService.selectAll();
 		return stdList;
 	}
+
 	
 
 }

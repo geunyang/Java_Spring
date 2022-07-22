@@ -9,12 +9,43 @@
  		select * from tbl_student
  	</select>
  	
- 	<select id="findById"></select>
+ 	<select id="findById" resultType="StudentVO">
+ 	 	select * from tbl_student where st_num = #{st_num}
+ 	</select>
  	
- 	<insert id="insert"></insert>
+ 	<insert id="insert" parameterType="StudentVO">
+	 	insert into tbl_student (
+	 		st_num,
+			st_name,
+			st_dept,
+			st_grade,
+			st_tel,
+			st_addr
+	 	) values (
+			#{st_num},
+			#{st_name},
+			#{st_dept},
+			#{st_grade},
+			#{st_tel},
+			#{st_addr}
+	 	)
+
+ 	</insert>
  	
- 	<update id="update"></update>
+ 	<update id="update">
+ 		 update tbl_student set
+			st_name = #{st_name},
+			st_dept = #{st_dept},
+			st_grade = #{st_grade},
+			st_tel = #{st_tel},
+			st_addr = #{st_addr}
+	 	where st_num = #{st_num}
  	
- 	<delete id="delete"></delete>
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		delete from tbl_student
+ 			where st_num = #{st_num}
+ 	</delete>
  
  </mapper> 

@@ -40,3 +40,10 @@ selectAll(), findById(), insert(), update(), delete() method 선언
 * StudentService.selectAll()
 * StudentDao.selectAll()
 * student-mapper.xml.selectAll
+
+## Student 정보 삭제
+* http://localhost:8080/score/api/student/학번/delete 로 요청시 학생의 데이터를 삭제할 수 있는 코드 작성
+* 학번에 해당하는 학생의 데이터를 삭제할 수 있는 method 생성 
+* stService.delete(학번)
+* stDao.delete(학번)
+* student-mapper.xml.delete

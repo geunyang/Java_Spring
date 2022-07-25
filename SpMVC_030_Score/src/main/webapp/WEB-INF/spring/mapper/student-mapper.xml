@@ -2,50 +2,70 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- <mapper namespace="com.callor.score.persistance.StudentDao">
- 
- 	<select id="selectAll" resultType="StudentVO">
- 		select * from tbl_student
- 	</select>
- 	
- 	<select id="findById" resultType="StudentVO">
- 	 	select * from tbl_student where st_num = #{st_num}
- 	</select>
- 	
- 	<insert id="insert" parameterType="StudentVO">
-	 	insert into tbl_student (
-	 		st_num,
-			st_name,
-			st_dept,
-			st_grade,
-			st_tel,
-			st_addr
-	 	) values (
-			#{st_num},
-			#{st_name},
-			#{st_dept},
-			#{st_grade},
-			#{st_tel},
-			#{st_addr}
-	 	)
 
- 	</insert>
- 	
- 	<update id="update">
- 		 update tbl_student set
-			st_name = #{st_name},
-			st_dept = #{st_dept},
-			st_grade = #{st_grade},
-			st_tel = #{st_tel},
-			st_addr = #{st_addr}
-	 	where st_num = #{st_num}
- 	
- 	</update>
- 	
- 	<delete id="delete">
- 		delete from tbl_student
- 			where st_num = #{st_num}
- 	</delete>
- 
- </mapper> 
+<mapper namespace="com.callor.score.persistance.StudentDao">
+
+	<select id="selectAll" resultType="StudentVO">
+		select * from tbl_student
+	</select>
+	<!-- id : PK 칼럼 property : vo 클래스의 변수 이름 column : table 의 칼럼 이름 -->
+	<!-- resultMap/resultType 공부하기 -->
+	<resultMap type="StudentVO" id="findByIdAndScore">
+		<id property="st_num" column="st_num" />
+		<collection property="scoreList" ofType="ScoreVO"
+			select="findByIdScore" column="st_num"></collection>
+	</resultMap>
+	<!--
+	중첩 result (resultMap 이 선행되어야 오류 확률 낮아짐)
+	1. findById 가 실행되고 그 결과를 resultMap 에 전달
+	2. resultMap 은 collection 항목의 코드를 실행
+		2.1. findByIdScore select 명령문을 실행하고
+		2.2. 그 결과를 List<ScoreVO> type 의 데이터로 변환한 후
+		2.3. StudentVO 의 scoreList 변수에 저장
+	-->
+	<select id="findById" resultMap="findByIdAndScore">
+		select * from tbl_student where st_num = #{st_num}
+	</select>
+	<select id="findByIdScore" resultType="ScoreVO">
+		select * from tbl_score
+			left join tbl_subject
+				on sc_sbcode = sb_code
+		where sc_stnum = #{sc_stnum}
+	</select>
+
+	<insert id="insert" parameterType="StudentVO">
+		insert into tbl_student (
+		st_num,
+		st_name,
+		st_dept,
+		st_grade,
+		st_tel,
+		st_addr
+		) values (
+		#{st_num},
+		#{st_name},
+		#{st_dept},
+		#{st_grade},
+		#{st_tel},
+		#{st_addr}
+		)
+
+	</insert>
+
+	<update id="update">
+		update tbl_student set
+		st_name = #{st_name},
+		st_dept = #{st_dept},
+		st_grade = #{st_grade},
+		st_tel = #{st_tel},
+		st_addr = #{st_addr}
+		where st_num = #{st_num}
+
+	</update>
+
+	<delete id="delete">
+		delete from tbl_student
+		where st_num = #{st_num}
+	</delete>
+
+</mapper> 

@@ -1,0 +1,14 @@
+@charset "UTF-8";
+div.student.detail.body {
+	display: flex;
+	flex-wrap: wrap;
+}
+div.student.detail.body div:nth-of-type(1) {
+	font-weight: bold;
+	color: gray;
+	margin-left: 10px;
+	
+}
+div.student.detail {
+	flex:1;
+}

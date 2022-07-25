@@ -47,3 +47,26 @@ selectAll(), findById(), insert(), update(), delete() method 선언
 * stService.delete(학번)
 * stDao.delete(학번)
 * student-mapper.xml.delete
+
+## tiles 적용하기
+* 스프링 타일즈란 뷰페이지의 jsp들을 상단, 사이드, 메인, 하단을 설정 상태로 include 처리해주는 구조의 템플릿. 페이지들을 일괄관리 할 수 있고, 공통사용하는 부분들을 매번 등록을 따로 해주지 않아도 되기 때문에 편리
+* pom.xml에 maven 추가, 버전 통일
+```
+		<org.tiles-version>3.0.8</org.tiles-version>
+```
+```
+		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-core -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>${org.tiles-version}</version>
+		</dependency>
+```
+```
+		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-extras -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+			<version>${org.tiles-version}</version>
+		</dependency>
+```

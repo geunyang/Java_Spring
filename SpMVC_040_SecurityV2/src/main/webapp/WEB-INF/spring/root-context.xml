@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 로그인이 안되어 있으면 자동으로 spring 제공하는 security 창 띄우기 -->
+	<sec:http>
+		<sec:intercept-url pattern="/login" access="permitAll"/>
+		<sec:intercept-url pattern="/**" access="isAuthenticated()"/>
+		<sec:form-login />
+		<sec:logout/>
+	</sec:http>
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+			<sec:user-service>
+				<!-- {noop} 암호화 하지 않겠다, 이하의 정보로 로그인하면 ADMIN -->
+				<!-- 인가(권한) -->
+				<sec:user name="ballza" password="{noop}!Korea8080" authorities="ROLE_ADMIN"/>
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+</beans>

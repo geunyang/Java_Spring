@@ -11,4 +11,11 @@ public class HomeController {
 	public String home() {
 		return "home";
 	}
+	
+	@RequestMapping(value = "/guest",method=RequestMethod.GET)
+	public String guest() {
+		
+		return null;
+		
+	}
 }

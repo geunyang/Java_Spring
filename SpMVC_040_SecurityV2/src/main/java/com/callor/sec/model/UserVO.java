@@ -24,12 +24,23 @@ import lombok.ToString;
 @ToString
 @Builder
 public class UserVO implements UserDetails{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
 	
-	private boolean isAccountNonExpired;
-	private boolean isAccountNotLocked;
-	private boolean isCredentialsNonExpired;
+	private boolean enabled;
+	private boolean accountNonExpired;
+	private boolean accountNonLocked;
+	private boolean credentialsNonExpired;
 	
-	private Collection<? extends GrantedAuthority> authorites;
+	private Collection<? extends GrantedAuthority> authorities;
+	
+	private String email;
+	private String tel;
+	private String realname;
+	private String nickname;
+
 }

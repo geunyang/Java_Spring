@@ -1,4 +1,4 @@
-package com.ballza.lunch;
+package com.ballza.lunch.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

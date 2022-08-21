@@ -1,10 +1,19 @@
 package com.ballza.lunch.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.util.Collections;
 import java.util.List;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.ballza.lunch.config.LunchConfig;
 import com.ballza.lunch.model.LunchRow;
@@ -25,14 +34,15 @@ public class LunchServiceImplV1 implements LunchService{
 			encodeParams = "?" + URLEncoder.encode("Key","UTF-8");
 			encodeParams += "=" + LunchConfig.SERVICE_KEY;
 			
+			encodeParams += "&" + URLEncoder.encode("Type","UTF-8");
+			encodeParams += "=json";
+			
 			encodeParams += "&" + URLEncoder.encode("pIndex","UTF-8");
 			encodeParams += "=1";
 			
 			encodeParams += "&" + URLEncoder.encode("pSize","UTF-8");
-			encodeParams += "=10";
+			encodeParams += "=100";
 			
-			encodeParams += "&" + URLEncoder.encode("Type","UTF-8");
-			encodeParams += "=json";
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,9 +54,64 @@ public class LunchServiceImplV1 implements LunchService{
 	}
 
 	@Override
-	public List<LunchRow> getLunch(String queryString) {
-		// TODO Auto-generated method stub
+	public List<LunchRow> getLunchRows(String queryString) {
+		URI lunchRestURI = null;
+		try {
+			lunchRestURI = new URI(queryString);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		HttpEntity<String> headerEntity = new HttpEntity<String>("parameter",headers);
+		RestTemplate restTemp = new RestTemplate();
+		ResponseEntity<String> resString = null;
+		resString = restTemp.exchange(lunchRestURI, HttpMethod.GET, headerEntity, String.class);
+		log.debug("=".repeat(100));
+		log.debug("{}",resString.getBody());
+		log.debug("=".repeat(100));
+/*		
+		ResponseEntity<LunchRoot> resLunchObject = null;
+		
+		ClientHttpRequestInterceptor httpIntercept
+		= new ClientHttpRequestInterceptor() {
+			
+			@Override
+			public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
+					throws IOException {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		};
+		
+		restTemp.getInterceptors().add(new ClientHttpRequestInterceptor() {
+			
+			@Override
+			public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
+					throws IOException {
+				
+				ClientHttpResponse response = execution.execute(request, body);
+				response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+						
+				return response;
+			}
+		});
+		
+		restTemp.getInterceptors().add((request, body, execution)->{
+			ClientHttpResponse response = execution.execute(request, body);
+			response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+			return response;
+			
+		});
+		restTemp.getInterceptors().add(new HttpRequestInterceptorV1());
+		resLunchObject = restTemp.exchange(lunchRestURI, HttpMethod.GET, headEntity, LunchRoot.class);
+		return resLunchObject.getBody().mealInfo.row;
+				
+*/		
 		return null;
+		
 	}
 	
 	

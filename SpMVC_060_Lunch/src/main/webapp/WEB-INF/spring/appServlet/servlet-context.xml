@@ -21,9 +21,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.callor.lunch.controller"/>
-	<context:component-scan base-package="com.callor.lunch.service.impl"/>
-	<context:component-scan base-package="com.callor.lunch.config"/>
+	<context:component-scan base-package="com.ballza.lunch.controller"/>
+	<context:component-scan base-package="com.ballza.lunch.service.impl"/>
+	<context:component-scan base-package="com.ballza.lunch.config"/>
 
 	
 	

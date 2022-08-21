@@ -133,7 +133,7 @@ public class FoodServiceImplV1 implements FoodService{
 			return response;
 		});
 		
-		
+	
 		//intercepter 를 restTemp 에 주입
 		restTemp.getInterceptors().add(new HttpRequestIntercepterV1());
 		

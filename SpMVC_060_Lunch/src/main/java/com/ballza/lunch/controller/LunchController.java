@@ -19,10 +19,18 @@ public class LunchController {
 	@RequestMapping(value = {"/",""}, method=RequestMethod.GET)
 	public String home() {
 		String queryString = lunchService.queryString(null);
-		lunchService.getl
-		
+		lunchService.getLunchRows(queryString);
+		return "home";
 	}
-	
+	/*
+	@ResponseBody
+	@RequestMapping(value = "/json", method=RequestMethod.GET, produces="application/json;charset=UTF-8")
+	public List<LunchRow> json() {
+		String queryString = lunchService.queryString(null);
+		List<LunchRow> lunchs = lunchService.getLunchRows(queryString);
+		return lunchs;
+	}
+	*/
 	
 	
 	

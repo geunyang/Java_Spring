@@ -4,20 +4,20 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
-import java.util.Collections;
 import java.util.List;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.ballza.lunch.config.LunchConfig;
 import com.ballza.lunch.model.LunchRow;
+import com.ballza.lunch.model.MealServiceDietInfo;
 import com.ballza.lunch.service.LunchService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,13 +35,19 @@ public class LunchServiceImplV1 implements LunchService{
 			encodeParams += "=" + LunchConfig.SERVICE_KEY;
 			
 			encodeParams += "&" + URLEncoder.encode("Type","UTF-8");
-			encodeParams += "=json";
+			encodeParams += "=xml";
 			
 			encodeParams += "&" + URLEncoder.encode("pIndex","UTF-8");
 			encodeParams += "=1";
 			
 			encodeParams += "&" + URLEncoder.encode("pSize","UTF-8");
 			encodeParams += "=100";
+			
+			encodeParams += "&" + URLEncoder.encode("ATPT_OFCDC_SC_CODE","UTF-8");
+			encodeParams += "=F10";
+			
+			encodeParams += "&" + URLEncoder.encode("SD_SCHUL_CODE","UTF-8");
+			encodeParams += "=7391127";
 			
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
@@ -62,16 +68,31 @@ public class LunchServiceImplV1 implements LunchService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		HttpEntity<String> headerEntity = new HttpEntity<String>("parameter",headers);
+		/*
+		 * HttpHeaders headers = new HttpHeaders();
+		 * headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		 * HttpEntity<String> headerEntity = new
+		 * HttpEntity<String>("parameter",headers);
+		 */
 		RestTemplate restTemp = new RestTemplate();
 		ResponseEntity<String> resString = null;
-		resString = restTemp.exchange(lunchRestURI, HttpMethod.GET, headerEntity, String.class);
+		resString = restTemp.exchange(lunchRestURI, HttpMethod.GET, null, String.class);
+		
+		ObjectMapper xmlMapper = new XmlMapper();
+		MealServiceDietInfo mealInfo = null;
+		try {
+			mealInfo = xmlMapper.readValue(resString.getBody(), MealServiceDietInfo.class);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		log.debug("=".repeat(100));
 		log.debug("{}",resString.getBody());
+		log.debug("{}",mealInfo);
 		log.debug("=".repeat(100));
+		
+		return mealInfo.row;
+//		return null;
 /*		
 		ResponseEntity<LunchRoot> resLunchObject = null;
 		
@@ -110,10 +131,7 @@ public class LunchServiceImplV1 implements LunchService{
 		return resLunchObject.getBody().mealInfo.row;
 				
 */		
-		return null;
 		
 	}
 	
-	
-
 }

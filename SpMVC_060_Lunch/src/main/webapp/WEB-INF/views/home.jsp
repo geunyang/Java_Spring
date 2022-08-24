@@ -50,6 +50,9 @@ footer {
 	text-align: center;
 	padding: 1rem;
 }
+.hidden_td {
+	display: none;
+}
 </style>
 <script>
 	const rootPath = '${rootPath}'
@@ -60,13 +63,13 @@ footer {
 		<h1>환영합니다 운암중 급식 안내 사이트 어떤급식 입니다</h1>
 	</header>
 	<section class="main">
-		<table>
+		<table class="LUNCHS">
 			<tr>
 				<th>날짜</th>
 				<th>메뉴</th>
 			</tr>
 			<c:forEach items="${LUNCHS}" var="LUNCH">
-				<tr>
+				<tr data-mlsv_ymd="${LUNCH.MLSV_YMD}">
 					<td>${LUNCH.MLSV_YMD}</td>
 					<td>${LUNCH.DDISH_NM}</td>
 				</tr>
